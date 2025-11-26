@@ -18,3 +18,14 @@
 - Some features show clearer separation by target in pairwise views — promising for predictive models.
 - Correlation clusters indicate groups of related features; consider multicollinearity when using linear models.
 - If class imbalance is non-trivial, use stratified evaluation or class-weighting / resampling.
+
+  ## Here are the Findings
+  <div style="desplay: flex">
+    <img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/eda1.png" alt='eda1' width="800px">
+    <img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/eda2.png" alt='eda2' width="800px">
+  </div>
+ <br>
+  <div style="desplay: flex">
+    <img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/eda3.png" alt='eda3' width="800px">
+    <img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/eda4.png" alt='eda4' width="800px">
+  </div>
