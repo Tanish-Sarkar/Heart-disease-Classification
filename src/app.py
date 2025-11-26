@@ -13,9 +13,12 @@ class PredictResponse(BaseModel):
     prediction: Any
     probabilities: Any = None
 
+@app.post('/')
+def root():
+    return {"message": "Welcome to the Heart Disease Prediction API"}
+
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: PredictRequest):
     res = predict_from_json(req.data)
     return res
 
-# Run with: uvicorn src.app:app --reload --port 8000
