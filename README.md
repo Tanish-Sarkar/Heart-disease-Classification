@@ -1,3 +1,11 @@
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.10+-blue" />
+  <img src="https://img.shields.io/badge/FastAPI-0.110+-green" />
+  <img src="https://img.shields.io/badge/Scikit--learn-1.2+-orange" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow" />
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen" />
+  <img src="https://img.shields.io/badge/Model-RandomForestClassifier-forestgreen" />
+</p>
 # ❤️ Heart Disease Prediction — End-to-End Machine Learning Project
 
 An end-to-end **Machine Learning Classification** system that predicts whether a person has heart disease based on clinical features.
