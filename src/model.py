@@ -9,6 +9,7 @@ def build_model(problem_type):
         model = RandomForestRegressor(n_estimators=100, random_state=42)
     else:
         raise ValueError("Unsupported problem type. Choose 'classification' or 'regression'.")
+    return model
     
 def save_model(model, path='models/model.joblib'):
     joblib.dump(model, path)

@@ -7,7 +7,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score, roc_auc_score,confusion_matrix, mean_absolute_error, mean_squared_error
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RandomizedSearchCV
-from src.data import load_data, save_data 
+from src.data import load_data, save_data, split_data
 from src.features import build_transformer, save_transformer
 from src.model import build_model, save_model
 
@@ -38,11 +38,11 @@ def run_training(raw_path, target_col, numeric_features, classification_features
 
     df = load_data(raw_path)
     X_train, X_val, X_test, y_train, y_val, y_test = split_data(df, target_col)
-    preprocressor = build_transformer(numeric_features, classification_features)
-    save_transformer(preprocressor, 'models/transformer.joblib')
+    preprocessor = build_transformer(numeric_features, classification_features)
+    save_transformer(preprocessor, 'models/transformer.joblib')
     model = build_model(problem_type)
     pipe = Pipeline([
-        ('processor', preprocressor),
+        ('processor', preprocessor),
         ('model', model)
     ])
 
@@ -80,7 +80,7 @@ def run_training(raw_path, target_col, numeric_features, classification_features
     else:
         plt.figure(figsize=(8, 6))
         plt.scatter(y_test, y_pred, alpha=0.5)
-        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', aplha=0.6)
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', alpha=0.6)
         plt.xlabel('Actual')
         plt.ylabel('Predicted')
         plt.title('Actual vs Predicted')

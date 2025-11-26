@@ -14,3 +14,7 @@ def split_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2, val_si
     X_train, X_val, y_train, y_val = train_test_split(X_trainval, y_trainval, test_size=val_relative_size, random_state=random_state)
     return X_train, X_val, X_test, y_train, y_val, y_test
 
+def save_data(df: pd.DataFrame, path: str):
+    """Save dataframe to CSV."""
+    df.to_csv(path, index=False)
+

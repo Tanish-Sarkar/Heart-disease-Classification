@@ -32,8 +32,8 @@ def build_transformer(numeric_features, categorical_features):
 
     return preprocessor
 
-def save_tranformer(preprocessor, path="models/tranformer.joblib"):
+def save_transformer(preprocessor, path="models/transformer.joblib"):
     joblib.dump(preprocessor, path)
 
-def load_tranformer(path="models/tranformer.joblib"):
+def load_transformer(path="models/transformer.joblib"):
     return joblib.load(path)
