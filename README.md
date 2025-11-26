@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen" />
   <img src="https://img.shields.io/badge/Model-RandomForestClassifier-forestgreen" />
 </p>
+
 # ❤️ Heart Disease Prediction — End-to-End Machine Learning Project
 
 An end-to-end **Machine Learning Classification** system that predicts whether a person has heart disease based on clinical features.
