@@ -4,7 +4,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import accuracy_score, roc_auc_score,confusion_matrix, mean_absolute_error, mean_squared_error
+from sklearn.metrics import (
+    accuracy_score,
+    roc_auc_score,
+    confusion_matrix,
+    mean_absolute_error,
+    mean_squared_error,
+    roc_curve,             
+)
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RandomizedSearchCV
 from src.data import load_data, save_data, split_data
@@ -39,16 +46,17 @@ def run_training(raw_path, target_col, numeric_features, classification_features
 
     df = load_data(raw_path)
     X_train, X_val, X_test, y_train, y_val, y_test = split_data(df, target_col)
+
     preprocessor = build_transformer(numeric_features, classification_features)
     save_transformer(preprocessor, 'models/transformer.joblib')
+
     model = build_model(problem_type)
     pipe = Pipeline([
         ('processor', preprocessor),
         ('model', model)
     ])
 
-
-    # RandomizedSearchCV here
+    # RandomizedSearchCV could go here later
     pipe.fit(X_train, y_train)
 
     # Save the model
@@ -57,7 +65,7 @@ def run_training(raw_path, target_col, numeric_features, classification_features
     # Evaluate
     if problem_type == 'classification':
         y_pred = pipe.predict(X_test)
-        y_proba = pipe.predict_proba(X_test)
+        y_proba = pipe.predict_proba(X_test)          # shape: (n_samples, n_classes)
         metrics = evaluate_classification(y_test, y_pred, y_proba)
     else:
         y_pred = pipe.predict(X_test)
@@ -68,16 +76,33 @@ def run_training(raw_path, target_col, numeric_features, classification_features
         json.dump(metrics, f, indent=4)
     print("Metrics:", metrics)
 
-    # Plot confusion matrix for classification
+    # Plot confusion matrix + ROC curve for classification
     if problem_type == 'classification':
+        # Confusion Matrix
         cm = np.array(metrics['confusion_matrix'])
         plt.figure(figsize=(8, 6))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
         plt.xlabel('Predicted')
         plt.ylabel('Actual')
         plt.title('Confusion Matrix')
+        plt.tight_layout()
         plt.savefig('reports/figures/confusion_matrix.png')
         plt.close()
+
+        # ROC Curve
+        # y_proba was defined above in the classification block
+        fpr, tpr, _ = roc_curve(y_test, y_proba[:, 1])   # positive class probs
+        plt.figure(figsize=(8, 6))
+        plt.plot(fpr, tpr, label=f"ROC AUC = {metrics['roc_auc']:.3f}")
+        plt.plot([0, 1], [0, 1], 'r--', alpha=0.6, label="Random")
+        plt.xlabel("False Positive Rate")
+        plt.ylabel("True Positive Rate")
+        plt.title("ROC Curve")
+        plt.legend(loc="lower right")
+        plt.tight_layout()
+        plt.savefig('reports/figures/roc_curve.png')
+        plt.close()
+
     else:
         plt.figure(figsize=(8, 6))
         plt.scatter(y_test, y_pred, alpha=0.5)
@@ -85,12 +110,13 @@ def run_training(raw_path, target_col, numeric_features, classification_features
         plt.xlabel('Actual')
         plt.ylabel('Predicted')
         plt.title('Actual vs Predicted')
+        plt.tight_layout()
         plt.savefig('reports/figures/actual_vs_predicted.png')
         plt.close()
 
 
 if __name__ == "__main__":
-    raw_path = 'data/processed/heart.csv'
+    raw_path = 'data/processed/heart.csv'   
     target_col = 'target'
     numeric_features = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
     classification_features = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
