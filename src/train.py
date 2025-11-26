@@ -11,6 +11,7 @@ from src.data import load_data, save_data, split_data
 from src.features import build_transformer, save_transformer
 from src.model import build_model, save_model
 
+
 def evaluate_classification(y_true, y_pred, y_proba=None):
     accuracy = accuracy_score(y_true, y_pred)
     roc_auc = roc_auc_score(y_true, y_proba[:, 1]) if y_proba is not None else None
@@ -89,7 +90,7 @@ def run_training(raw_path, target_col, numeric_features, classification_features
 
 
 if __name__ == "__main__":
-    raw_path = 'data/raw/heart_disease_data.csv'
+    raw_path = 'data/processed/heart.csv'
     target_col = 'target'
     numeric_features = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
     classification_features = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']

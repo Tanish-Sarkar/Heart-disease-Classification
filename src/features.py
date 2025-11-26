@@ -20,10 +20,11 @@ def build_transformer(numeric_features, categorical_features):
     ])
 
     # Catergorical Feature pipeline
-    categorical_pipeline = Pipeline([
-        ("imputer", SimpleImputer(strategy='most_frequent')),
-        ("onehot", OneHotEncoder(handle_unknown="ignore", sparse=False))
+    categorical_pipeline = Pipeline(steps=[
+        ("imputer", SimpleImputer(strategy="most_frequent")),
+        ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=False))
     ])
+
 
     preprocessor = ColumnTransformer(transformers=[
         ("num", numeric_pipeline, numeric_features),

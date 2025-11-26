@@ -24,5 +24,18 @@ def predict_from_json(json_data, model_path='models/model.joblib'):
 
 
 if __name__ == "__main__":
-    sample = {"num_col1": 1.2, "num_col2": 3.4, "cat_col1": "A"}
+    sample = {
+        "age": 63,
+        "sex": 1,
+        "cp": 3,
+        "trestbps": 145,
+        "chol": 233,
+        "fbs": 1,
+        "restecg": 0,
+        "thalach": 150,
+        "exang": 0,
+        "oldpeak": 2.3,
+        "slope": 0,
+        "ca": 0,
+        "thal": 1}
     print(predict_from_json(sample))
