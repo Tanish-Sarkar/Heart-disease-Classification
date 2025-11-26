@@ -106,6 +106,7 @@ EDA is done in:
 
 ```
 notebooks/eda.ipynb
+reports/EDA-report.md
 ```
 
 It includes:
@@ -190,7 +191,8 @@ reports/
     ├── confusion_matrix.png
     └── roc_curve.png
 ```
-
+<img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/confusion_matrix.png" alt='cm'>
+<img src="https://github.com/Tanish-Sarkar/Heart-disease-Classification/blob/main/reports/figures/roc_curve.png" alt='roc'>
 Example metrics:
 
 ```json
