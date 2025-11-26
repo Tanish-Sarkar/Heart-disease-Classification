@@ -296,8 +296,8 @@ Example response:
 }
 ```
 
-Interactive API UI:
-👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+Interactive LIVE API:
+👉 [https://heart-disease-classification-mg7u.onrender.com/docs](https://heart-disease-classification-mg7u.onrender.com/docs)
 
 ---
 
